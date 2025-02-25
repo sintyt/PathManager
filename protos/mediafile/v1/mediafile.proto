@@ -1,0 +1,186 @@
+syntax = "proto3";
+package mediafile.v1;
+
+// 
+service MediafileService {
+    // コンフィギュレーションを取得します。
+    rpc SetConfig (SetConfigRequest) returns (SetConfigResponse);
+
+    // コンフィギュレーションを設定します。
+    rpc GetConfig (GetConfigRequest) returns (GetConfigResponse);
+
+    // 写真情報を取得します。
+    rpc GetPhotos (GetPhotosRequest) returns (GetPhotosResponse);
+
+    // 写真を移動します。
+    rpc MovePhotos (MovePhotosRequest) returns (MovePhotosResponse);
+
+    // カメラ情報を取得します。
+    rpc GetCameras (GetCamerasRequest) returns (GetCamerasResponse);
+
+    // ログを取得します。
+    rpc GetLogs (GetLogRequest) returns (GetLogsResponse);
+}
+
+// 各種モードの列挙型です。
+enum Mode {
+    MODE_UNSPECIFIED = 0;
+    MODE_FILE = 1;   // ファイルから取得、ファイルアクセスありキャッシュの更新
+    MODE_CACHE = 2;  // キャッシュのみ、ファイルアクセスしない
+    MODE_TEST = 3;   // テスト用
+}
+
+// タイムゾーン保持可能な日時メッセージです。
+message Instant {
+    int64 seconds = 1;          // 1970/1/1 00:00:00からの秒数
+    uint32 nanos = 2;           // 秒未満のナノ秒
+    int32 timezone_offset = 3;  // タイムゾーンオフセット（秒単位）
+}
+
+// サーバー環境メッセージです。
+message Config {
+    // サーバーのURL
+    string server_url = 1;
+
+    // Configファイルのファイル名(ex. .config.json)
+    // ex. photo_distination/.config.json
+    string config_path = 2;
+
+    // 写真の移動先ディレクトリ
+    string photo_distination = 3;
+
+    // 対象とする画像ファイルの拡張子配列
+    // ex ["jpg", "jpeg", "png"]
+    repeated string photofile_extensions = 4;
+    
+    // 写真リスト（キャッシュ）を保存するファイル名
+    // ex. photo_distination/.cache/photo_cache.json
+    string photo_cache_path = 5;
+
+    // カメラリスト（キャッシュ）を保存するファイル名
+    // ex. photo_distination/.cache/camera_cache.json
+    string camera_cache_path = 6;
+
+    // ログファイル名
+    // ex. photo_distination/.log/log.json
+    string log_path = 7;
+
+    // 画像ファイルのソースディレクトリ
+    repeated string photo_sources = 8;
+}
+
+// 
+message SetConfigRequest {
+    Mode mode = 1;
+    Config config = 2;
+}
+
+message SetConfigResponse {
+    bool success = 1;
+}
+
+// 
+message GetConfigRequest {
+    Mode mode = 1;
+}
+
+message GetConfigResponse {
+    Config config = 1;
+}
+
+// 写真情報メッセージ
+message Photo {
+    // ディレクトリ及びファイル名に依存しない一意のID
+    // このIDは、ファイル名が変更された場合でも変更されない
+    // カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び
+    // ファイルサイズをハッシュ化したもの
+    string id = 1;
+
+    string fullpath = 2;            // フルパス
+    uint64 file_size =3;            // ファイルサイズ
+    Metadata metadata = 4;          // メタデータ
+    string generated_filename = 5;  // 生成されたファイル名（推奨ファイル名）
+}
+
+// メタデータ
+message Metadata {
+    Instant shot_at = 1;    // 撮影日時
+    string maker = 2;       // メーカー名
+    string model = 3;       // モデル名
+}
+
+message GetPhotosRequest {
+    Mode mode = 1;
+}
+
+message GetPhotosResponse {
+    repeated Photo photos = 1;
+}
+
+// 
+message MovePhotosRequest {
+    string destination_directory = 1;
+    repeated Photo photos = 2;
+}
+
+// 
+message MovePhotosResponse {
+    bool success = 1;
+}
+
+message PhotoList {
+    repeated Photo photos = 1;
+}
+
+message PhotoMap {
+    map<string, Photo> key_id = 1;
+}
+
+// カメラ情報
+message Camera {
+    string maker = 1;         // メーカー名
+    string model = 2;         // モデル名
+    string label = 3;         // カメラのラベル
+    int32 photo_count = 4;    // 撮影された写真の枚数
+    Instant first_at = 5;     // 最初の撮影された写真の日時
+    Instant last_at = 6;      // 最後に撮影された写真の日時
+}
+ 
+message GetCamerasRequest {
+    Mode mode = 1;
+}
+
+message GetCamerasResponse {
+    CameraMap camera_map = 1;
+}
+
+// Key: カメラモデル名, Value: Camera
+message CameraMap {
+    map<string, Camera> by_model = 1;
+}
+
+message CameraList {
+    repeated Camera cameras = 1;
+}
+
+// ログのメッセージです。
+message Log
+{
+    // ログ作成日
+    Instant created_at = 1;
+    string message = 2;
+}
+
+// ログリストの汎用メッセージです。
+message LogList {
+    repeated Log logs = 1;
+}
+
+// GetLogのリクエストメッセージです。
+message GetLogRequest {
+    Mode mode = 1;
+}
+
+message GetLogsResponse {
+    repeated Log logs = 1;
+}

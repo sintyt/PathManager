@@ -1,0 +1,13 @@
+{
+  "name": "path-manager",
+  "version": "1.0.0",
+  "description": "This is file and directory path manager.",
+  "author": "Shin Toyota",
+  "scripts": {
+    "gen": "npx buf generate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "1.50.0"
+  }
+}
