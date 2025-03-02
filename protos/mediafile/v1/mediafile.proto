@@ -3,6 +3,31 @@ package mediafile.v1;
 
 // 
 service MediafileService {
+
+    // コンフィギュレーションを保存します。
+    rpc SaveConfig (SaveConfigRequest) returns (SaveConfigResponse);
+
+    // コンフィギュレーションを読み込みます。
+    rpc LoadConfig (LoadConfigRequest) returns (LoadConfigResponse);
+
+    // 写真のキャッシュ情報を保存します。
+    rpc SavePhotoCache (SavePhotoCacheRequest) returns (SavePhotoCacheResponse);
+
+    // 写真のキャッシュ情報を読み込みます。
+    rpc LoadPhotoCache (LoadPhotoCacheRequest) returns (LoadPhotoCacheResponse);
+
+    // カメラのキャッシュ情報を保存します。
+    rpc SaveCameraCache (SaveCameraCacheRequest) returns (SaveCameraCacheResponse);
+
+    // カメラのキャッシュ情報を読み込みます。
+    rpc LoadCameraCache (LoadCameraCacheRequest) returns (LoadCameraCacheResponse);
+
+    // ログを存します。
+    rpc SaveLog (SaveLogRequest) returns (SaveLogResponse);
+
+    // ログを読み込みます。
+    rpc LoadLog (LoadLogRequest) returns (LoadLogResponse);
+
     // コンフィギュレーションを取得します。
     rpc SetConfig (SetConfigRequest) returns (SetConfigResponse);
 
@@ -19,7 +44,71 @@ service MediafileService {
     rpc GetCameras (GetCamerasRequest) returns (GetCamerasResponse);
 
     // ログを取得します。
-    rpc GetLogs (GetLogRequest) returns (GetLogsResponse);
+    rpc GetLog (GetLogRequest) returns (GetLogResponse);
+}
+
+message SaveConfigRequest {
+    Mode mode = 1;
+}
+
+message SaveConfigResponse {
+    bool success = 1;
+}
+
+message LoadConfigRequest {
+    Mode mode = 1;
+}
+
+message LoadConfigResponse {
+    bool success = 1;
+}
+
+message SavePhotoCacheRequest {
+    Mode mode = 1;
+}
+
+message SavePhotoCacheResponse {
+    bool success = 1;
+}
+
+message LoadPhotoCacheRequest {
+    Mode mode = 1;
+}
+
+message LoadPhotoCacheResponse {
+    bool success = 1;
+}
+
+message SaveCameraCacheRequest {
+    Mode mode = 1;
+}
+
+message SaveCameraCacheResponse {
+    bool success = 1;
+}
+
+message LoadCameraCacheRequest {
+    Mode mode = 1;
+}
+
+message LoadCameraCacheResponse {
+    bool success = 1;
+}
+
+message SaveLogRequest {
+    Mode mode = 1;
+}
+
+message SaveLogResponse {
+    bool success = 1;
+}
+
+message LoadLogRequest {
+    Mode mode = 1;
+}
+
+message LoadLogResponse {
+    bool success = 1;
 }
 
 // 各種モードの列挙型です。
@@ -99,7 +188,7 @@ message Photo {
     string fullpath = 2;            // フルパス
     uint64 file_size =3;            // ファイルサイズ
     Metadata metadata = 4;          // メタデータ
-    string generated_filename = 5;  // 生成されたファイル名（推奨ファイル名）
+    string recommended_path = 5;     // 推奨フルパス
 }
 
 // メタデータ
@@ -119,8 +208,8 @@ message GetPhotosResponse {
 
 // 
 message MovePhotosRequest {
-    string destination_directory = 1;
-    repeated Photo photos = 2;
+    Mode mode = 1;
+    repeated string ids = 2;
 }
 
 // 
@@ -133,7 +222,7 @@ message PhotoList {
 }
 
 message PhotoMap {
-    map<string, Photo> key_id = 1;
+    map<string, Photo> by_id = 1;
 }
 
 // カメラ情報
@@ -173,7 +262,7 @@ message Log
 
 // ログリストの汎用メッセージです。
 message LogList {
-    repeated Log logs = 1;
+    repeated Log log = 1;
 }
 
 // GetLogのリクエストメッセージです。
@@ -181,6 +270,6 @@ message GetLogRequest {
     Mode mode = 1;
 }
 
-message GetLogsResponse {
-    repeated Log logs = 1;
+message GetLogResponse {
+    repeated Log log = 1;
 }
