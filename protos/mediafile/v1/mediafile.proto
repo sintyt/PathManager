@@ -4,17 +4,20 @@ package mediafile.v1;
 // 
 service MediafileService {
 
-    // コンフィギュレーションを保存します。
-    rpc SaveConfig (SaveConfigRequest) returns (SaveConfigResponse);
-
     // コンフィギュレーションを読み込みます。
-    rpc LoadConfig (LoadConfigRequest) returns (LoadConfigResponse);
+    rpc ReadConfig (ReadConfigRequest) returns (ReadConfigResponse);
+
+    // コンフィギュレーションを保存します。
+    rpc WriteConfig (WriteConfigRequest) returns (WriteConfigResponse);
 
     // 写真のキャッシュ情報を保存します。
     rpc SavePhotoCache (SavePhotoCacheRequest) returns (SavePhotoCacheResponse);
 
     // 写真のキャッシュ情報を読み込みます。
     rpc LoadPhotoCache (LoadPhotoCacheRequest) returns (LoadPhotoCacheResponse);
+
+    // photo_folder以下のディレクトリを取得します。
+    rpc GetPhotoSubFolders (GetPhotoSubFoldersRequest) returns (GetPhotoSubFoldersResponse);
 
     // カメラのキャッシュ情報を保存します。
     rpc SaveCameraCache (SaveCameraCacheRequest) returns (SaveCameraCacheResponse);
@@ -28,12 +31,6 @@ service MediafileService {
     // ログを読み込みます。
     rpc LoadLog (LoadLogRequest) returns (LoadLogResponse);
 
-    // コンフィギュレーションを取得します。
-    rpc SetConfig (SetConfigRequest) returns (SetConfigResponse);
-
-    // コンフィギュレーションを設定します。
-    rpc GetConfig (GetConfigRequest) returns (GetConfigResponse);
-
     // 写真情報を取得します。
     rpc GetPhotos (GetPhotosRequest) returns (GetPhotosResponse);
 
@@ -45,22 +42,6 @@ service MediafileService {
 
     // ログを取得します。
     rpc GetLog (GetLogRequest) returns (GetLogResponse);
-}
-
-message SaveConfigRequest {
-    Mode mode = 1;
-}
-
-message SaveConfigResponse {
-    bool success = 1;
-}
-
-message LoadConfigRequest {
-    Mode mode = 1;
-}
-
-message LoadConfigResponse {
-    bool success = 1;
 }
 
 message SavePhotoCacheRequest {
@@ -132,11 +113,10 @@ message Config {
     string server_url = 1;
 
     // Configファイルのファイル名(ex. .config.json)
-    // ex. photo_distination/.config.json
     string config_path = 2;
 
     // 写真の移動先ディレクトリ
-    string photo_distination = 3;
+    string managed_photo_path = 3;
 
     // 対象とする画像ファイルの拡張子配列
     // ex ["jpg", "jpeg", "png"]
@@ -153,28 +133,25 @@ message Config {
     // ログファイル名
     // ex. photo_distination/.log/log.json
     string log_path = 7;
-
-    // 画像ファイルのソースディレクトリ
-    repeated string photo_sources = 8;
 }
 
 // 
-message SetConfigRequest {
+message ReadConfigRequest {
+    Mode mode = 1;
+}
+
+message ReadConfigResponse {
+    Config config = 1;
+}
+
+// 
+message WriteConfigRequest {
     Mode mode = 1;
     Config config = 2;
 }
 
-message SetConfigResponse {
+message WriteConfigResponse {
     bool success = 1;
-}
-
-// 
-message GetConfigRequest {
-    Mode mode = 1;
-}
-
-message GetConfigResponse {
-    Config config = 1;
 }
 
 // 写真情報メッセージ
@@ -185,10 +162,10 @@ message Photo {
     // ファイルサイズをハッシュ化したもの
     string id = 1;
 
-    string fullpath = 2;            // フルパス
+    string file_path = 2;            // ファイルパス
     uint64 file_size =3;            // ファイルサイズ
     Metadata metadata = 4;          // メタデータ
-    string recommended_path = 5;     // 推奨フルパス
+    string unique_file_path = 5;     // 推奨フルパス
 }
 
 // メタデータ
@@ -200,6 +177,7 @@ message Metadata {
 
 message GetPhotosRequest {
     Mode mode = 1;
+    string source_path = 2;
 }
 
 message GetPhotosResponse {
@@ -223,6 +201,14 @@ message PhotoList {
 
 message PhotoMap {
     map<string, Photo> by_id = 1;
+}
+
+message GetPhotoSubFoldersRequest {
+    Mode mode = 1;
+}
+
+message GetPhotoSubFoldersResponse {
+    repeated string sub_folders = 1;
 }
 
 // カメラ情報

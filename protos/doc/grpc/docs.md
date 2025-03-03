@@ -11,17 +11,15 @@
     - [Config](#mediafile-v1-Config)
     - [GetCamerasRequest](#mediafile-v1-GetCamerasRequest)
     - [GetCamerasResponse](#mediafile-v1-GetCamerasResponse)
-    - [GetConfigRequest](#mediafile-v1-GetConfigRequest)
-    - [GetConfigResponse](#mediafile-v1-GetConfigResponse)
     - [GetLogRequest](#mediafile-v1-GetLogRequest)
     - [GetLogResponse](#mediafile-v1-GetLogResponse)
+    - [GetPhotoSubFoldersRequest](#mediafile-v1-GetPhotoSubFoldersRequest)
+    - [GetPhotoSubFoldersResponse](#mediafile-v1-GetPhotoSubFoldersResponse)
     - [GetPhotosRequest](#mediafile-v1-GetPhotosRequest)
     - [GetPhotosResponse](#mediafile-v1-GetPhotosResponse)
     - [Instant](#mediafile-v1-Instant)
     - [LoadCameraCacheRequest](#mediafile-v1-LoadCameraCacheRequest)
     - [LoadCameraCacheResponse](#mediafile-v1-LoadCameraCacheResponse)
-    - [LoadConfigRequest](#mediafile-v1-LoadConfigRequest)
-    - [LoadConfigResponse](#mediafile-v1-LoadConfigResponse)
     - [LoadLogRequest](#mediafile-v1-LoadLogRequest)
     - [LoadLogResponse](#mediafile-v1-LoadLogResponse)
     - [LoadPhotoCacheRequest](#mediafile-v1-LoadPhotoCacheRequest)
@@ -35,16 +33,16 @@
     - [PhotoList](#mediafile-v1-PhotoList)
     - [PhotoMap](#mediafile-v1-PhotoMap)
     - [PhotoMap.ByIdEntry](#mediafile-v1-PhotoMap-ByIdEntry)
+    - [ReadConfigRequest](#mediafile-v1-ReadConfigRequest)
+    - [ReadConfigResponse](#mediafile-v1-ReadConfigResponse)
     - [SaveCameraCacheRequest](#mediafile-v1-SaveCameraCacheRequest)
     - [SaveCameraCacheResponse](#mediafile-v1-SaveCameraCacheResponse)
-    - [SaveConfigRequest](#mediafile-v1-SaveConfigRequest)
-    - [SaveConfigResponse](#mediafile-v1-SaveConfigResponse)
     - [SaveLogRequest](#mediafile-v1-SaveLogRequest)
     - [SaveLogResponse](#mediafile-v1-SaveLogResponse)
     - [SavePhotoCacheRequest](#mediafile-v1-SavePhotoCacheRequest)
     - [SavePhotoCacheResponse](#mediafile-v1-SavePhotoCacheResponse)
-    - [SetConfigRequest](#mediafile-v1-SetConfigRequest)
-    - [SetConfigResponse](#mediafile-v1-SetConfigResponse)
+    - [WriteConfigRequest](#mediafile-v1-WriteConfigRequest)
+    - [WriteConfigResponse](#mediafile-v1-WriteConfigResponse)
   
     - [Mode](#mediafile-v1-Mode)
   
@@ -136,13 +134,12 @@ Key: カメラモデル名, Value: Camera
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | server_url | [string](#string) |  | サーバーのURL |
-| config_path | [string](#string) |  | Configファイルのファイル名(ex. .config.json) ex. photo_distination/.config.json |
-| photo_distination | [string](#string) |  | 写真の移動先ディレクトリ |
+| config_path | [string](#string) |  | Configファイルのファイル名(ex. .config.json) |
+| managed_photo_path | [string](#string) |  | 写真の移動先ディレクトリ |
 | photofile_extensions | [string](#string) | repeated | 対象とする画像ファイルの拡張子配列 ex [&#34;jpg&#34;, &#34;jpeg&#34;, &#34;png&#34;] |
 | photo_cache_path | [string](#string) |  | 写真リスト（キャッシュ）を保存するファイル名 ex. photo_distination/.cache/photo_cache.json |
 | camera_cache_path | [string](#string) |  | カメラリスト（キャッシュ）を保存するファイル名 ex. photo_distination/.cache/camera_cache.json |
 | log_path | [string](#string) |  | ログファイル名 ex. photo_distination/.log/log.json |
-| photo_sources | [string](#string) | repeated | 画像ファイルのソースディレクトリ |
 
 
 
@@ -179,36 +176,6 @@ Key: カメラモデル名, Value: Camera
 
 
 
-<a name="mediafile-v1-GetConfigRequest"></a>
-
-### GetConfigRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| mode | [Mode](#mediafile-v1-Mode) |  |  |
-
-
-
-
-
-
-<a name="mediafile-v1-GetConfigResponse"></a>
-
-### GetConfigResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| config | [Config](#mediafile-v1-Config) |  |  |
-
-
-
-
-
-
 <a name="mediafile-v1-GetLogRequest"></a>
 
 ### GetLogRequest
@@ -239,6 +206,36 @@ GetLogのリクエストメッセージです。
 
 
 
+<a name="mediafile-v1-GetPhotoSubFoldersRequest"></a>
+
+### GetPhotoSubFoldersRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mode | [Mode](#mediafile-v1-Mode) |  |  |
+
+
+
+
+
+
+<a name="mediafile-v1-GetPhotoSubFoldersResponse"></a>
+
+### GetPhotoSubFoldersResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_folders | [string](#string) | repeated |  |
+
+
+
+
+
+
 <a name="mediafile-v1-GetPhotosRequest"></a>
 
 ### GetPhotosRequest
@@ -248,6 +245,7 @@ GetLogのリクエストメッセージです。
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | mode | [Mode](#mediafile-v1-Mode) |  |  |
+| source_path | [string](#string) |  |  |
 
 
 
@@ -304,36 +302,6 @@ GetLogのリクエストメッセージです。
 <a name="mediafile-v1-LoadCameraCacheResponse"></a>
 
 ### LoadCameraCacheResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| success | [bool](#bool) |  |  |
-
-
-
-
-
-
-<a name="mediafile-v1-LoadConfigRequest"></a>
-
-### LoadConfigRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| mode | [Mode](#mediafile-v1-Mode) |  |  |
-
-
-
-
-
-
-<a name="mediafile-v1-LoadConfigResponse"></a>
-
-### LoadConfigResponse
 
 
 
@@ -494,10 +462,10 @@ GetLogのリクエストメッセージです。
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  | ディレクトリ及びファイル名に依存しない一意のID このIDは、ファイル名が変更された場合でも変更されない カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び ファイルサイズをハッシュ化したもの |
-| fullpath | [string](#string) |  | フルパス |
+| file_path | [string](#string) |  | ファイルパス |
 | file_size | [uint64](#uint64) |  | ファイルサイズ |
 | metadata | [Metadata](#mediafile-v1-Metadata) |  | メタデータ |
-| recommended_path | [string](#string) |  | 推奨フルパス |
+| unique_file_path | [string](#string) |  | 推奨フルパス |
 
 
 
@@ -550,6 +518,36 @@ GetLogのリクエストメッセージです。
 
 
 
+<a name="mediafile-v1-ReadConfigRequest"></a>
+
+### ReadConfigRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mode | [Mode](#mediafile-v1-Mode) |  |  |
+
+
+
+
+
+
+<a name="mediafile-v1-ReadConfigResponse"></a>
+
+### ReadConfigResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| config | [Config](#mediafile-v1-Config) |  |  |
+
+
+
+
+
+
 <a name="mediafile-v1-SaveCameraCacheRequest"></a>
 
 ### SaveCameraCacheRequest
@@ -568,36 +566,6 @@ GetLogのリクエストメッセージです。
 <a name="mediafile-v1-SaveCameraCacheResponse"></a>
 
 ### SaveCameraCacheResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| success | [bool](#bool) |  |  |
-
-
-
-
-
-
-<a name="mediafile-v1-SaveConfigRequest"></a>
-
-### SaveConfigRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| mode | [Mode](#mediafile-v1-Mode) |  |  |
-
-
-
-
-
-
-<a name="mediafile-v1-SaveConfigResponse"></a>
-
-### SaveConfigResponse
 
 
 
@@ -670,9 +638,9 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-SetConfigRequest"></a>
+<a name="mediafile-v1-WriteConfigRequest"></a>
 
-### SetConfigRequest
+### WriteConfigRequest
 
 
 
@@ -686,9 +654,9 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-SetConfigResponse"></a>
+<a name="mediafile-v1-WriteConfigResponse"></a>
 
-### SetConfigResponse
+### WriteConfigResponse
 
 
 
@@ -728,16 +696,15 @@ GetLogのリクエストメッセージです。
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| SaveConfig | [SaveConfigRequest](#mediafile-v1-SaveConfigRequest) | [SaveConfigResponse](#mediafile-v1-SaveConfigResponse) | コンフィギュレーションを保存します。 |
-| LoadConfig | [LoadConfigRequest](#mediafile-v1-LoadConfigRequest) | [LoadConfigResponse](#mediafile-v1-LoadConfigResponse) | コンフィギュレーションを読み込みます。 |
+| ReadConfig | [ReadConfigRequest](#mediafile-v1-ReadConfigRequest) | [ReadConfigResponse](#mediafile-v1-ReadConfigResponse) | コンフィギュレーションを読み込みます。 |
+| WriteConfig | [WriteConfigRequest](#mediafile-v1-WriteConfigRequest) | [WriteConfigResponse](#mediafile-v1-WriteConfigResponse) | コンフィギュレーションを保存します。 |
 | SavePhotoCache | [SavePhotoCacheRequest](#mediafile-v1-SavePhotoCacheRequest) | [SavePhotoCacheResponse](#mediafile-v1-SavePhotoCacheResponse) | 写真のキャッシュ情報を保存します。 |
 | LoadPhotoCache | [LoadPhotoCacheRequest](#mediafile-v1-LoadPhotoCacheRequest) | [LoadPhotoCacheResponse](#mediafile-v1-LoadPhotoCacheResponse) | 写真のキャッシュ情報を読み込みます。 |
+| GetPhotoSubFolders | [GetPhotoSubFoldersRequest](#mediafile-v1-GetPhotoSubFoldersRequest) | [GetPhotoSubFoldersResponse](#mediafile-v1-GetPhotoSubFoldersResponse) | photo_folder以下のディレクトリを取得します。 |
 | SaveCameraCache | [SaveCameraCacheRequest](#mediafile-v1-SaveCameraCacheRequest) | [SaveCameraCacheResponse](#mediafile-v1-SaveCameraCacheResponse) | カメラのキャッシュ情報を保存します。 |
 | LoadCameraCache | [LoadCameraCacheRequest](#mediafile-v1-LoadCameraCacheRequest) | [LoadCameraCacheResponse](#mediafile-v1-LoadCameraCacheResponse) | カメラのキャッシュ情報を読み込みます。 |
 | SaveLog | [SaveLogRequest](#mediafile-v1-SaveLogRequest) | [SaveLogResponse](#mediafile-v1-SaveLogResponse) | ログを存します。 |
 | LoadLog | [LoadLogRequest](#mediafile-v1-LoadLogRequest) | [LoadLogResponse](#mediafile-v1-LoadLogResponse) | ログを読み込みます。 |
-| SetConfig | [SetConfigRequest](#mediafile-v1-SetConfigRequest) | [SetConfigResponse](#mediafile-v1-SetConfigResponse) | コンフィギュレーションを取得します。 |
-| GetConfig | [GetConfigRequest](#mediafile-v1-GetConfigRequest) | [GetConfigResponse](#mediafile-v1-GetConfigResponse) | コンフィギュレーションを設定します。 |
 | GetPhotos | [GetPhotosRequest](#mediafile-v1-GetPhotosRequest) | [GetPhotosResponse](#mediafile-v1-GetPhotosResponse) | 写真情報を取得します。 |
 | MovePhotos | [MovePhotosRequest](#mediafile-v1-MovePhotosRequest) | [MovePhotosResponse](#mediafile-v1-MovePhotosResponse) | 写真を移動します。 |
 | GetCameras | [GetCamerasRequest](#mediafile-v1-GetCamerasRequest) | [GetCamerasResponse](#mediafile-v1-GetCamerasResponse) | カメラ情報を取得します。 |
