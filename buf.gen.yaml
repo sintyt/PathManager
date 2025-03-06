@@ -8,10 +8,10 @@ plugins:
     opt:
       - markdown,docs.md
   - remote: buf.build/bufbuild/es
-    out: MediafileClient/app/grpc
+    out: MediaPathClient/app/grpc
     opt:
       - import_extension=.js
   - remote: buf.build/bufbuild/connect-web
-    out: MediafileClient/app/grpc
+    out: MediaPathClient/app/grpc
     opt:
     - import_extension=.js

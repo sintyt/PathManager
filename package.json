@@ -6,7 +6,7 @@
   "scripts": {
     "gen": "npx buf generate",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": ".\\MediafileServer\\target\\release\\mediafile_server.exe",
+    "server": ".\\MediaPathServer\\target\\release\\mediapath_server.exe",
     "watch-protos": "nodemon --watch protos --ext proto --exec \"npm run gen\""
   },
   "devDependencies": {
