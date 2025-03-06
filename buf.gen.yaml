@@ -4,14 +4,14 @@ managed:
 clean: true
 plugins:
   - remote: buf.build/community/pseudomuto-doc
-    out: protos/doc/grpc
+    out: doc
     opt:
       - markdown,docs.md
   - remote: buf.build/bufbuild/es
-    out: MediaPathClient/app/grpc
+    out: client
     opt:
       - import_extension=.js
   - remote: buf.build/bufbuild/connect-web
-    out: MediaPathClient/app/grpc
+    out: client
     opt:
     - import_extension=.js

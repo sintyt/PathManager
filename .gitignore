@@ -1,5 +1,6 @@
 .DS_Store
 /node_modules/
-/MediaFile-react/
-/MediafileClient/
-/Mediafile-rust/
+
+// generated files from protoc
+/doc/
+/client/
