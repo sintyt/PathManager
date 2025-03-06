@@ -24,6 +24,7 @@
     - [LoadPhotoCacheResponse](#mediafile-v1-LoadPhotoCacheResponse)
     - [Log](#mediafile-v1-Log)
     - [LogList](#mediafile-v1-LogList)
+    - [Metadata](#mediafile-v1-Metadata)
     - [MovePhotosRequest](#mediafile-v1-MovePhotosRequest)
     - [MovePhotosResponse](#mediafile-v1-MovePhotosResponse)
     - [Photo](#mediafile-v1-Photo)
@@ -43,23 +44,26 @@
     - [WriteConfigRequest](#mediafile-v1-WriteConfigRequest)
     - [WriteConfigResponse](#mediafile-v1-WriteConfigResponse)
   
-    - [RequestMode](#mediafile-v1-RequestMode)
-    - [ResponseStatus](#mediafile-v1-ResponseStatus)
+    - [RequestMode](#mediapath-v1-RequestMode)
+    - [ResponseStatus](#mediapath-v1-ResponseStatus)
   
-    - [MediafileService](#mediafile-v1-MediafileService)
+    - [MediapathService](#mediapath-v1-MediapathService)
+  
+- [v1/utils.proto](#v1_utils-proto)
+    - [Instant](#utils-v1-Instant)
   
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="mediafile_v1_mediafile-proto"></a>
+<a name="v1_mediapath-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## mediafile/v1/mediafile.proto
+## v1/mediapath.proto
 
 
 
-<a name="mediafile-v1-Camera"></a>
+<a name="mediapath-v1-Camera"></a>
 
 ### Camera
 カメラ情報
@@ -71,15 +75,15 @@
 | model | [string](#string) |  | モデル名 |
 | label | [string](#string) |  | カメラのラベル |
 | photo_count | [int32](#int32) |  | 撮影された写真の枚数 |
-| first_at | [Instant](#mediafile-v1-Instant) |  | 最初の撮影された写真の日時 |
-| last_at | [Instant](#mediafile-v1-Instant) |  | 最後に撮影された写真の日時 |
+| first_at | [Instant](#mediapath-v1-Instant) |  | 最初の撮影された写真の日時 |
+| last_at | [Instant](#mediapath-v1-Instant) |  | 最後に撮影された写真の日時 |
 
 
 
 
 
 
-<a name="mediafile-v1-CameraList"></a>
+<a name="mediapath-v1-CameraList"></a>
 
 ### CameraList
 
@@ -87,14 +91,14 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| cameras | [Camera](#mediafile-v1-Camera) | repeated |  |
+| cameras | [Camera](#mediapath-v1-Camera) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-CameraMap"></a>
+<a name="mediapath-v1-CameraMap"></a>
 
 ### CameraMap
 Key: カメラモデル名, Value: Camera
@@ -102,14 +106,14 @@ Key: カメラモデル名, Value: Camera
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| by_model | [CameraMap.ByModelEntry](#mediafile-v1-CameraMap-ByModelEntry) | repeated |  |
+| by_model | [CameraMap.ByModelEntry](#mediapath-v1-CameraMap-ByModelEntry) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-CameraMap-ByModelEntry"></a>
+<a name="mediapath-v1-CameraMap-ByModelEntry"></a>
 
 ### CameraMap.ByModelEntry
 
@@ -118,14 +122,14 @@ Key: カメラモデル名, Value: Camera
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Camera](#mediafile-v1-Camera) |  |  |
+| value | [Camera](#mediapath-v1-Camera) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-Config"></a>
+<a name="mediapath-v1-Config"></a>
 
 ### Config
 サーバー環境メッセージです。
@@ -146,7 +150,7 @@ Key: カメラモデル名, Value: Camera
 
 
 
-<a name="mediafile-v1-GetCamerasRequest"></a>
+<a name="mediapath-v1-GetCamerasRequest"></a>
 
 ### GetCamerasRequest
 
@@ -154,14 +158,14 @@ Key: カメラモデル名, Value: Camera
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-GetCamerasResponse"></a>
+<a name="mediapath-v1-GetCamerasResponse"></a>
 
 ### GetCamerasResponse
 
@@ -169,14 +173,14 @@ Key: カメラモデル名, Value: Camera
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| camera_map | [CameraMap](#mediafile-v1-CameraMap) |  |  |
+| camera_map | [CameraMap](#mediapath-v1-CameraMap) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-GetLogRequest"></a>
+<a name="mediapath-v1-GetLogRequest"></a>
 
 ### GetLogRequest
 GetLogのリクエストメッセージです。
@@ -184,14 +188,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-GetLogResponse"></a>
+<a name="mediapath-v1-GetLogResponse"></a>
 
 ### GetLogResponse
 
@@ -199,14 +203,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| log | [Log](#mediafile-v1-Log) | repeated |  |
+| log | [Log](#mediapath-v1-Log) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-GetPhotosRequest"></a>
+<a name="mediapath-v1-GetPhotosRequest"></a>
 
 ### GetPhotosRequest
 
@@ -214,7 +218,7 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 | source_path | [string](#string) |  |  |
 
 
@@ -222,7 +226,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-GetPhotosResponse"></a>
+<a name="mediapath-v1-GetPhotosResponse"></a>
 
 ### GetPhotosResponse
 
@@ -230,14 +234,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| photos | [Photo](#mediafile-v1-Photo) | repeated |  |
+| photos | [Photo](#mediapath-v1-Photo) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-Instant"></a>
+<a name="mediapath-v1-Instant"></a>
 
 ### Instant
 タイムゾーン保持可能な日時メッセージです。
@@ -254,7 +258,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-LoadCameraCacheRequest"></a>
+<a name="mediapath-v1-LoadCameraCacheRequest"></a>
 
 ### LoadCameraCacheRequest
 
@@ -262,14 +266,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-LoadCameraCacheResponse"></a>
+<a name="mediapath-v1-LoadCameraCacheResponse"></a>
 
 ### LoadCameraCacheResponse
 
@@ -277,14 +281,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-LoadLogRequest"></a>
+<a name="mediapath-v1-LoadLogRequest"></a>
 
 ### LoadLogRequest
 
@@ -292,14 +296,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-LoadLogResponse"></a>
+<a name="mediapath-v1-LoadLogResponse"></a>
 
 ### LoadLogResponse
 
@@ -307,14 +311,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-LoadPhotoCacheRequest"></a>
+<a name="mediapath-v1-LoadPhotoCacheRequest"></a>
 
 ### LoadPhotoCacheRequest
 
@@ -322,14 +326,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-LoadPhotoCacheResponse"></a>
+<a name="mediapath-v1-LoadPhotoCacheResponse"></a>
 
 ### LoadPhotoCacheResponse
 
@@ -337,14 +341,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-Log"></a>
+<a name="mediapath-v1-Log"></a>
 
 ### Log
 ログのメッセージです。
@@ -352,7 +356,7 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| created_at | [Instant](#mediafile-v1-Instant) |  | ログ作成日 |
+| created_at | [Instant](#mediapath-v1-Instant) |  | ログ作成日 |
 | message | [string](#string) |  |  |
 
 
@@ -360,7 +364,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-LogList"></a>
+<a name="mediapath-v1-LogList"></a>
 
 ### LogList
 ログリストの汎用メッセージです。
@@ -375,6 +379,23 @@ GetLogのリクエストメッセージです。
 
 
 
+<a name="mediafile-v1-Metadata"></a>
+
+### Metadata
+メタデータ
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shot_at | [Instant](#mediafile-v1-Instant) |  | 撮影日時 |
+| maker | [string](#string) |  | メーカー名 |
+| model | [string](#string) |  | モデル名 |
+
+
+
+
+
+
 <a name="mediafile-v1-MovePhotosRequest"></a>
 
 ### MovePhotosRequest
@@ -383,7 +404,7 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 | ids | [string](#string) | repeated |  |
 
 
@@ -391,7 +412,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-MovePhotosResponse"></a>
+<a name="mediapath-v1-MovePhotosResponse"></a>
 
 ### MovePhotosResponse
 
@@ -399,14 +420,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-Photo"></a>
+<a name="mediapath-v1-Photo"></a>
 
 ### Photo
 写真情報メッセージ
@@ -414,22 +435,18 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | フォルダー及びファイル名に依存しない一意のID このIDは、ファイル名が変更された場合でも変更されない カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び ファイルサイズをハッシュ化したもの
-
-一意のID文字列 |
-| file | [string](#string) |  | フルパスファイル名 |
-| size | [uint64](#uint64) |  | ファイルサイズ |
-| shot_at | [Instant](#mediafile-v1-Instant) |  | 撮影日時 |
-| maker | [string](#string) |  | メーカー名 |
-| model | [string](#string) |  | モデル名 |
-| unique_file | [string](#string) |  | 推奨フルパスファイル名 |
+| id | [string](#string) |  | フォルダー及びファイル名に依存しない一意のID このIDは、ファイル名が変更された場合でも変更されない カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び ファイルサイズをハッシュ化したもの |
+| file_path | [string](#string) |  | ファイルパス |
+| file_size | [uint64](#uint64) |  | ファイルサイズ |
+| metadata | [Metadata](#mediafile-v1-Metadata) |  | メタデータ |
+| unique_file_path | [string](#string) |  | 推奨フルパス |
 
 
 
 
 
 
-<a name="mediafile-v1-PhotoList"></a>
+<a name="mediapath-v1-PhotoList"></a>
 
 ### PhotoList
 
@@ -437,14 +454,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| photos | [Photo](#mediafile-v1-Photo) | repeated |  |
+| photos | [Photo](#mediapath-v1-Photo) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-PhotoMap"></a>
+<a name="mediapath-v1-PhotoMap"></a>
 
 ### PhotoMap
 
@@ -452,14 +469,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| by_id | [PhotoMap.ByIdEntry](#mediafile-v1-PhotoMap-ByIdEntry) | repeated |  |
+| by_id | [PhotoMap.ByIdEntry](#mediapath-v1-PhotoMap-ByIdEntry) | repeated |  |
 
 
 
 
 
 
-<a name="mediafile-v1-PhotoMap-ByIdEntry"></a>
+<a name="mediapath-v1-PhotoMap-ByIdEntry"></a>
 
 ### PhotoMap.ByIdEntry
 
@@ -468,14 +485,14 @@ GetLogのリクエストメッセージです。
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [Photo](#mediafile-v1-Photo) |  |  |
+| value | [Photo](#mediapath-v1-Photo) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-ReadConfigRequest"></a>
+<a name="mediapath-v1-ReadConfigRequest"></a>
 
 ### ReadConfigRequest
 
@@ -483,14 +500,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-ReadConfigResponse"></a>
+<a name="mediapath-v1-ReadConfigResponse"></a>
 
 ### ReadConfigResponse
 
@@ -498,14 +515,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| config | [Config](#mediafile-v1-Config) |  |  |
+| config | [Config](#mediapath-v1-Config) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-ReadFolderRequest"></a>
+<a name="mediapath-v1-ReadFolderRequest"></a>
 
 ### ReadFolderRequest
 フォルダー読み込みリクエストメッセージです。
@@ -513,7 +530,7 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 | folder | [string](#string) |  |  |
 
 
@@ -521,7 +538,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-ReadFolderResponse"></a>
+<a name="mediapath-v1-ReadFolderResponse"></a>
 
 ### ReadFolderResponse
 フォルダー読み込みレスポンスメッセージです。
@@ -537,7 +554,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-SaveCameraCacheRequest"></a>
+<a name="mediapath-v1-SaveCameraCacheRequest"></a>
 
 ### SaveCameraCacheRequest
 
@@ -545,14 +562,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-SaveCameraCacheResponse"></a>
+<a name="mediapath-v1-SaveCameraCacheResponse"></a>
 
 ### SaveCameraCacheResponse
 
@@ -560,14 +577,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-SaveLogRequest"></a>
+<a name="mediapath-v1-SaveLogRequest"></a>
 
 ### SaveLogRequest
 
@@ -575,14 +592,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-SaveLogResponse"></a>
+<a name="mediapath-v1-SaveLogResponse"></a>
 
 ### SaveLogResponse
 
@@ -590,14 +607,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-SavePhotoCacheRequest"></a>
+<a name="mediapath-v1-SavePhotoCacheRequest"></a>
 
 ### SavePhotoCacheRequest
 
@@ -605,14 +622,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-SavePhotoCacheResponse"></a>
+<a name="mediapath-v1-SavePhotoCacheResponse"></a>
 
 ### SavePhotoCacheResponse
 
@@ -620,14 +637,14 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-WriteConfigRequest"></a>
+<a name="mediapath-v1-WriteConfigRequest"></a>
 
 ### WriteConfigRequest
 
@@ -635,15 +652,15 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mode | [RequestMode](#mediafile-v1-RequestMode) |  |  |
-| config | [Config](#mediafile-v1-Config) |  |  |
+| mode | [RequestMode](#mediapath-v1-RequestMode) |  |  |
+| config | [Config](#mediapath-v1-Config) |  |  |
 
 
 
 
 
 
-<a name="mediafile-v1-WriteConfigResponse"></a>
+<a name="mediapath-v1-WriteConfigResponse"></a>
 
 ### WriteConfigResponse
 
@@ -651,7 +668,7 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [ResponseStatus](#mediafile-v1-ResponseStatus) |  |  |
+| status | [ResponseStatus](#mediapath-v1-ResponseStatus) |  |  |
 
 
 
@@ -660,7 +677,7 @@ GetLogのリクエストメッセージです。
  
 
 
-<a name="mediafile-v1-RequestMode"></a>
+<a name="mediapath-v1-RequestMode"></a>
 
 ### RequestMode
 リクエストモードの列挙型です。
@@ -674,7 +691,7 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-ResponseStatus"></a>
+<a name="mediapath-v1-ResponseStatus"></a>
 
 ### ResponseStatus
 レスポンスステータスの列挙型です。
@@ -690,26 +707,59 @@ GetLogのリクエストメッセージです。
  
 
 
-<a name="mediafile-v1-MediafileService"></a>
+<a name="mediapath-v1-MediapathService"></a>
 
-### MediafileService
+### MediapathService
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| ReadFolder | [ReadFolderRequest](#mediafile-v1-ReadFolderRequest) | [ReadFolderResponse](#mediafile-v1-ReadFolderResponse) |  |
-| ReadConfig | [ReadConfigRequest](#mediafile-v1-ReadConfigRequest) | [ReadConfigResponse](#mediafile-v1-ReadConfigResponse) | コンフィギュレーションを読み込みます。 |
-| WriteConfig | [WriteConfigRequest](#mediafile-v1-WriteConfigRequest) | [WriteConfigResponse](#mediafile-v1-WriteConfigResponse) | コンフィギュレーションを保存します。 |
-| SavePhotoCache | [SavePhotoCacheRequest](#mediafile-v1-SavePhotoCacheRequest) | [SavePhotoCacheResponse](#mediafile-v1-SavePhotoCacheResponse) | 写真のキャッシュ情報を保存します。 |
-| LoadPhotoCache | [LoadPhotoCacheRequest](#mediafile-v1-LoadPhotoCacheRequest) | [LoadPhotoCacheResponse](#mediafile-v1-LoadPhotoCacheResponse) | 写真のキャッシュ情報を読み込みます。 |
-| SaveCameraCache | [SaveCameraCacheRequest](#mediafile-v1-SaveCameraCacheRequest) | [SaveCameraCacheResponse](#mediafile-v1-SaveCameraCacheResponse) | カメラのキャッシュ情報を保存します。 |
-| LoadCameraCache | [LoadCameraCacheRequest](#mediafile-v1-LoadCameraCacheRequest) | [LoadCameraCacheResponse](#mediafile-v1-LoadCameraCacheResponse) | カメラのキャッシュ情報を読み込みます。 |
-| SaveLog | [SaveLogRequest](#mediafile-v1-SaveLogRequest) | [SaveLogResponse](#mediafile-v1-SaveLogResponse) | ログを存します。 |
-| LoadLog | [LoadLogRequest](#mediafile-v1-LoadLogRequest) | [LoadLogResponse](#mediafile-v1-LoadLogResponse) | ログを読み込みます。 |
-| GetPhotos | [GetPhotosRequest](#mediafile-v1-GetPhotosRequest) | [GetPhotosResponse](#mediafile-v1-GetPhotosResponse) | 写真情報を取得します。 |
-| MovePhotos | [MovePhotosRequest](#mediafile-v1-MovePhotosRequest) | [MovePhotosResponse](#mediafile-v1-MovePhotosResponse) | 写真を移動します。 |
-| GetCameras | [GetCamerasRequest](#mediafile-v1-GetCamerasRequest) | [GetCamerasResponse](#mediafile-v1-GetCamerasResponse) | カメラ情報を取得します。 |
-| GetLog | [GetLogRequest](#mediafile-v1-GetLogRequest) | [GetLogResponse](#mediafile-v1-GetLogResponse) | ログを取得します。 |
+| ReadFolder | [ReadFolderRequest](#mediapath-v1-ReadFolderRequest) | [ReadFolderResponse](#mediapath-v1-ReadFolderResponse) |  |
+| ReadConfig | [ReadConfigRequest](#mediapath-v1-ReadConfigRequest) | [ReadConfigResponse](#mediapath-v1-ReadConfigResponse) | コンフィギュレーションを読み込みます。 |
+| WriteConfig | [WriteConfigRequest](#mediapath-v1-WriteConfigRequest) | [WriteConfigResponse](#mediapath-v1-WriteConfigResponse) | コンフィギュレーションを保存します。 |
+| SavePhotoCache | [SavePhotoCacheRequest](#mediapath-v1-SavePhotoCacheRequest) | [SavePhotoCacheResponse](#mediapath-v1-SavePhotoCacheResponse) | 写真のキャッシュ情報を保存します。 |
+| LoadPhotoCache | [LoadPhotoCacheRequest](#mediapath-v1-LoadPhotoCacheRequest) | [LoadPhotoCacheResponse](#mediapath-v1-LoadPhotoCacheResponse) | 写真のキャッシュ情報を読み込みます。 |
+| SaveCameraCache | [SaveCameraCacheRequest](#mediapath-v1-SaveCameraCacheRequest) | [SaveCameraCacheResponse](#mediapath-v1-SaveCameraCacheResponse) | カメラのキャッシュ情報を保存します。 |
+| LoadCameraCache | [LoadCameraCacheRequest](#mediapath-v1-LoadCameraCacheRequest) | [LoadCameraCacheResponse](#mediapath-v1-LoadCameraCacheResponse) | カメラのキャッシュ情報を読み込みます。 |
+| SaveLog | [SaveLogRequest](#mediapath-v1-SaveLogRequest) | [SaveLogResponse](#mediapath-v1-SaveLogResponse) | ログを存します。 |
+| LoadLog | [LoadLogRequest](#mediapath-v1-LoadLogRequest) | [LoadLogResponse](#mediapath-v1-LoadLogResponse) | ログを読み込みます。 |
+| GetPhotos | [GetPhotosRequest](#mediapath-v1-GetPhotosRequest) | [GetPhotosResponse](#mediapath-v1-GetPhotosResponse) | 写真情報を取得します。 |
+| MovePhotos | [MovePhotosRequest](#mediapath-v1-MovePhotosRequest) | [MovePhotosResponse](#mediapath-v1-MovePhotosResponse) | 写真を移動します。 |
+| GetCameras | [GetCamerasRequest](#mediapath-v1-GetCamerasRequest) | [GetCamerasResponse](#mediapath-v1-GetCamerasResponse) | カメラ情報を取得します。 |
+| GetLog | [GetLogRequest](#mediapath-v1-GetLogRequest) | [GetLogResponse](#mediapath-v1-GetLogResponse) | ログを取得します。 |
+
+ 
+
+
+
+<a name="v1_utils-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/utils.proto
+
+
+
+<a name="utils-v1-Instant"></a>
+
+### Instant
+タイムゾーン保持可能な日時メッセージです。
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| seconds | [int64](#int64) |  | 1970/1/1 00:00:00からの秒数 |
+| nanos | [uint32](#uint32) |  | 秒未満のナノ秒 |
+| timezone_offset | [int32](#int32) |  | タイムゾーンオフセット（秒単位） |
+
+
+
+
+
+ 
+
+ 
+
+ 
 
  
 

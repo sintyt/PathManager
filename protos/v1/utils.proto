@@ -1,0 +1,10 @@
+syntax = "proto3";
+package utils.v1;
+
+// タイムゾーン保持可能な日時メッセージです。
+message Instant {
+    int64 seconds = 1;          // 1970/1/1 00:00:00からの秒数
+    uint32 nanos = 2;           // 秒未満のナノ秒
+    int32 timezone_offset = 3;  // タイムゾーンオフセット（秒単位）
+}
+
