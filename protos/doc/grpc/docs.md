@@ -24,7 +24,6 @@
     - [LoadPhotoCacheResponse](#mediafile-v1-LoadPhotoCacheResponse)
     - [Log](#mediafile-v1-Log)
     - [LogList](#mediafile-v1-LogList)
-    - [Metadata](#mediafile-v1-Metadata)
     - [MovePhotosRequest](#mediafile-v1-MovePhotosRequest)
     - [MovePhotosResponse](#mediafile-v1-MovePhotosResponse)
     - [Photo](#mediafile-v1-Photo)
@@ -376,23 +375,6 @@ GetLogのリクエストメッセージです。
 
 
 
-<a name="mediafile-v1-Metadata"></a>
-
-### Metadata
-メタデータ
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| shot_at | [Instant](#mediafile-v1-Instant) |  | 撮影日時 |
-| maker | [string](#string) |  | メーカー名 |
-| model | [string](#string) |  | モデル名 |
-
-
-
-
-
-
 <a name="mediafile-v1-MovePhotosRequest"></a>
 
 ### MovePhotosRequest
@@ -432,11 +414,15 @@ GetLogのリクエストメッセージです。
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | フォルダー及びファイル名に依存しない一意のID このIDは、ファイル名が変更された場合でも変更されない カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び ファイルサイズをハッシュ化したもの |
-| file_path | [string](#string) |  | ファイルパス |
-| file_size | [uint64](#uint64) |  | ファイルサイズ |
-| metadata | [Metadata](#mediafile-v1-Metadata) |  | メタデータ |
-| unique_file_path | [string](#string) |  | 推奨フルパス |
+| id | [string](#string) |  | フォルダー及びファイル名に依存しない一意のID このIDは、ファイル名が変更された場合でも変更されない カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び ファイルサイズをハッシュ化したもの
+
+一意のID文字列 |
+| file | [string](#string) |  | フルパスファイル名 |
+| size | [uint64](#uint64) |  | ファイルサイズ |
+| shot_at | [Instant](#mediafile-v1-Instant) |  | 撮影日時 |
+| maker | [string](#string) |  | メーカー名 |
+| model | [string](#string) |  | モデル名 |
+| unique_file | [string](#string) |  | 推奨フルパスファイル名 |
 
 
 
