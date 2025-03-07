@@ -1,3 +1,2 @@
-fn main() {
-    println!("Hello, world!");
-}
+// dummy main.rs file
+fn main() { }
