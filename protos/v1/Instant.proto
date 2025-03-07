@@ -8,3 +8,7 @@ message Instant {
     int32 timezone_offset = 3;  // タイムゾーンオフセット（秒単位）
 }
 
+message InstantRange {
+    Instant start = 1;  // 開始日時
+    Instant end = 2;    // 終了日時
+}

@@ -1,5 +1,3 @@
-set shell := ["bash", "-c"]
-
 out-docs := 'generated/docs'
 out-rust := 'generated/rust'
 out-jsts := 'generated/jsts'
