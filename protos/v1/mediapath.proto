@@ -1,9 +1,8 @@
 syntax = "proto3";
 package mediapath.v1;
 
-import public "v1/utils.proto";
-
-// 
+import "Instant.proto";
+ 
 service MediapathService {
     //
     rpc ReadFolder (ReadFolderRequest) returns (ReadFolderResponse);
@@ -43,6 +42,13 @@ service MediapathService {
 
     // ログを取得します。
     rpc GetLog (GetLogRequest) returns (GetLogResponse);
+}
+
+// タイムゾーン保持可能な日時メッセージです。
+message Instant {
+    int64 seconds = 1;          // 1970/1/1 00:00:00からの秒数
+    uint32 nanos = 2;           // 秒未満のナノ秒
+    int32 timezone_offset = 3;  // タイムゾーンオフセット（秒単位）
 }
 
 message SavePhotoCacheRequest {

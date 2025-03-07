@@ -4,14 +4,14 @@ managed:
 clean: true
 plugins:
   - remote: buf.build/community/pseudomuto-doc
-    out: doc
+    out: generated/doc
     opt:
       - markdown,docs.md
   - remote: buf.build/bufbuild/es
-    out: client
+    out: generated/client
     opt:
       - import_extension=.js
   - remote: buf.build/bufbuild/connect-web
-    out: client
+    out: generated/client
     opt:
     - import_extension=.js

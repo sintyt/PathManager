@@ -2,5 +2,11 @@
 /node_modules/
 
 // generated files from protoc
+/generated/
 /doc/
 /client/
+/server/
+
+# Added by cargo
+
+/target

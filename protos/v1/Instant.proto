@@ -1,5 +1,5 @@
 syntax = "proto3";
-package utils.v1;
+package instant.v1;
 
 // タイムゾーン保持可能な日時メッセージです。
 message Instant {
