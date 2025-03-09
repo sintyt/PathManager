@@ -19,9 +19,10 @@ message Photo {
     string unique_path = 7; // 推奨のフルパス
 }
 
+// フォルダー内の全ての写真ファイルの情報を取得する
 message GetPhotosRequest {
     RequestMode mode = 1;
-    string source_path = 2;
+    string folder = 2;
 }
 
 message GetPhotosResponse {
