@@ -1,0 +1,49 @@
+syntax = "proto3";
+package mediapath.v1;
+
+import "v1/instant.proto";
+import "v1/enum.proto";
+
+// 写真情報メッセージ
+message Photo {
+    // フォルダー及びファイル名に依存しない一意のID
+    // このIDは、ファイル名が変更された場合でも変更されない
+    // カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び
+    // ファイルサイズをハッシュ化したもの
+    string id = 1;          // 一意のID文字列
+    string file_path = 2;        // ファイルのフルパス
+    uint64 file_size =3;         // ファイルのサイズ
+    Instant shot_at = 4;    // 撮影日時
+    string maker = 5;       // メーカー名
+    string model = 6;       // モデル名
+    string unique_path = 7; // 推奨のフルパス
+}
+
+message GetPhotosRequest {
+    RequestMode mode = 1;
+    string source_path = 2;
+}
+
+message GetPhotosResponse {
+    repeated Photo photos = 1;
+}
+
+// 
+message MovePhotosRequest {
+    RequestMode mode = 1;
+    repeated string ids = 2;
+}
+
+// 
+message MovePhotosResponse {
+    ResponseStatus status = 1;
+}
+
+message PhotoList {
+    repeated Photo photos = 1;
+}
+
+message PhotoMap {
+    map<string, Photo> by_id = 1;
+}
+

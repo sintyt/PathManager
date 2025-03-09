@@ -1,7 +1,7 @@
 use std::{fs, path::PathBuf};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let includes = &["protos"];
+    let includes = &["protos", "protos/v1"];
     let out_dir = &PathBuf::from("generated/rust");
 
     fs::create_dir_all(out_dir)?;
@@ -17,9 +17,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build_client(true)
         .build_server(true)
         .compile_protos_with_config(config, protos, includes)?;
-
-    let mut config = prost_build::Config::new();
-    config.protoc_arg("--experimental_allow_proto3_optional");
 
     Ok(())
 }

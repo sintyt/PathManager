@@ -1,0 +1,13 @@
+syntax = "proto3";
+package mediapath.v1;
+
+import "v1/instant.proto";
+
+// ログのメッセージです。
+message Log
+{
+    // ログ作成日
+    Instant created_at = 1;
+    string message = 2;
+}
+

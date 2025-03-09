@@ -1,7 +1,11 @@
 syntax = "proto3";
 package mediapath.v1;
 
-import "v1/instant.proto";
+import "v1/enum.proto";
+import "v1/config.proto";
+import "v1/photo.proto";
+import "v1/camera.proto";
+import "v1/log.proto";
  
 service MediapathService {
     //
@@ -42,13 +46,6 @@ service MediapathService {
 
     // ログを取得します。
     rpc GetLog (GetLogRequest) returns (GetLogResponse);
-}
-
-// タイムゾーン保持可能な日時メッセージです。
-message Instant {
-    int64 seconds = 1;          // 1970/1/1 00:00:00からの秒数
-    uint32 nanos = 2;           // 秒未満のナノ秒
-    int32 timezone_offset = 3;  // タイムゾーンオフセット（秒単位）
 }
 
 message SavePhotoCacheRequest {
@@ -99,23 +96,8 @@ message LoadLogResponse {
     ResponseStatus status = 1;
 }
 
-// リクエストモードの列挙型です。
-enum RequestMode {
-    DEFAULT_MODE = 0;
-    FILE_MODE = 1;   // ファイルから取得、ファイルアクセスありキャッシュの更新
-    CACHE_MODE = 2;  // キャッシュのみ、ファイルアクセスしない
-    TEST_MODE = 3;   // テスト用
-}
-
-// レスポンスステータスの列挙型です。
-enum ResponseStatus {
-    STATUS_OK = 0;  // 正常終了
-    STATUS_ERROR = 1;   // エラー
-}
-
 // フォルダー読み込みリクエストメッセージです。
 message ReadFolderRequest {
-    RequestMode mode = 1;
     string folder = 2;
 }
 
@@ -125,105 +107,6 @@ message ReadFolderResponse {
     repeated string files = 2;
 }
 
-// サーバー環境メッセージです。
-message Config {
-    // サーバーのURL
-    string server_url = 1;
-
-    // Configファイルのフルパス文字列
-    string config_file = 2;
-
-    // 管理する写真フォルダー
-    string managed_photo_folder = 3;
-
-    // 対象とする画像ファイルの拡張子配列
-    // ex ["jpg", "jpeg", "png"]
-    repeated string photofile_extensions = 4;
-    
-    // 写真情報ののキャッシュを保存するファイル名
-    // ex. [managed_photo_folder]/.cache/photo_cache.json
-    string photo_cache_file = 5;
-
-    // カメラ情報のキャッシュを保存するファイル名
-    // ex. [managed_photo_folder]/.cache/camera_cache.json
-    string camera_cache_file = 6;
-
-    // ログファイル名
-    // ex. [managed_photo_folder]/.log/log.json
-    string log_file = 7;
-}
-
-// 
-message ReadConfigRequest {
-    RequestMode mode = 1;
-}
-
-message ReadConfigResponse {
-    Config config = 1;
-}
-
-// 
-message WriteConfigRequest {
-    RequestMode mode = 1;
-    Config config = 2;
-}
-
-message WriteConfigResponse {
-    ResponseStatus status = 1;
-}
-
-// 写真情報メッセージ
-message Photo {
-    // フォルダー及びファイル名に依存しない一意のID
-    // このIDは、ファイル名が変更された場合でも変更されない
-    // カメラのモデル名・SUBSEC含む撮影日時（取得不可はファイルの作成日時）及び
-    // ファイルサイズをハッシュ化したもの
-    string id = 1;          // 一意のID文字列
-    string file = 2;        // フルパスファイル名
-    uint64 size =3;         // ファイルサイズ
-    Instant shot_at = 4;    // 撮影日時
-    string maker = 5;       // メーカー名
-    string model = 6;       // モデル名
-    string unique_file = 7; // 推奨フルパスファイル名
-}
-
-message GetPhotosRequest {
-    RequestMode mode = 1;
-    string source_path = 2;
-}
-
-message GetPhotosResponse {
-    repeated Photo photos = 1;
-}
-
-// 
-message MovePhotosRequest {
-    RequestMode mode = 1;
-    repeated string ids = 2;
-}
-
-// 
-message MovePhotosResponse {
-    ResponseStatus status = 1;
-}
-
-message PhotoList {
-    repeated Photo photos = 1;
-}
-
-message PhotoMap {
-    map<string, Photo> by_id = 1;
-}
-
-// カメラ情報
-message Camera {
-    string maker = 1;         // メーカー名
-    string model = 2;         // モデル名
-    string label = 3;         // カメラのラベル
-    int32 photo_count = 4;    // 撮影された写真の枚数
-    Instant first_at = 5;     // 最初の撮影された写真の日時
-    Instant last_at = 6;      // 最後に撮影された写真の日時
-}
  
 message GetCamerasRequest {
     RequestMode mode = 1;
@@ -240,14 +123,6 @@ message CameraMap {
 
 message CameraList {
     repeated Camera cameras = 1;
-}
-
-// ログのメッセージです。
-message Log
-{
-    // ログ作成日
-    Instant created_at = 1;
-    string message = 2;
 }
 
 // ログリストの汎用メッセージです。

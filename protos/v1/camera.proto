@@ -1,0 +1,14 @@
+syntax = "proto3";
+package mediapath.v1;
+
+import "v1/instant.proto";
+
+// カメラ情報
+message Camera {
+    string maker = 1;         // メーカー名
+    string model = 2;         // モデル名
+    string label = 3;         // カメラのラベル
+    int32 photo_count = 4;    // 撮影された写真の枚数
+    Instant first_at = 5;     // 最初の撮影された写真の日時
+    Instant last_at = 6;      // 最後に撮影された写真の日時
+}

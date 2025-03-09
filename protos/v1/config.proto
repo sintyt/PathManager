@@ -1,0 +1,52 @@
+syntax = "proto3";
+package mediapath.v1;
+
+import "v1/enum.proto";
+
+// サーバー環境メッセージです。
+message Config {
+    // サーバーのURL
+    string server_url = 1;
+
+    // Configファイルのフルパス文字列
+    string config_file = 2;
+
+    // 管理する写真フォルダー
+    string managed_photo_folder = 3;
+
+    // 対象とする画像ファイルの拡張子配列
+    // ex ["jpg", "jpeg", "png"]
+    repeated string photofile_extensions = 4;
+    
+    // 写真情報ののキャッシュを保存するファイル名
+    // ex. [managed_photo_folder]/.cache/photo_cache.json
+    string photo_cache_file = 5;
+
+    // カメラ情報のキャッシュを保存するファイル名
+    // ex. [managed_photo_folder]/.cache/camera_cache.json
+    string camera_cache_file = 6;
+
+    // ログファイル名
+    // ex. [managed_photo_folder]/.log/log.json
+    string log_file = 7;
+}
+
+// 
+message ReadConfigRequest {
+    RequestMode mode = 1;
+}
+
+message ReadConfigResponse {
+    Config config = 1;
+}
+
+// 
+message WriteConfigRequest {
+    RequestMode mode = 1;
+    Config config = 2;
+}
+
+message WriteConfigResponse {
+    ResponseStatus status = 1;
+}
+

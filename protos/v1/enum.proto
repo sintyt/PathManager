@@ -1,0 +1,17 @@
+syntax = "proto3";
+package mediapath.v1;
+
+// リクエストモードの列挙型です。
+enum RequestMode {
+    DEFAULT_MODE = 0;
+    FILE_MODE = 1;   // ファイルから取得、ファイルアクセスありキャッシュの更新
+    CACHE_MODE = 2;  // キャッシュのみ、ファイルアクセスしない
+    TEST_MODE = 3;   // テスト用
+}
+
+// レスポンスステータスの列挙型です。
+enum ResponseStatus {
+    STATUS_OK = 0;  // 正常終了
+    STATUS_ERROR = 1;   // エラー
+}
+
