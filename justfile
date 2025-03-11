@@ -1,9 +1,18 @@
+# justfileはJustの設定ファイルです。
+# JustはMakefileの代替ツールです。
+
+# シェルの設定
 set shell := ["bash", "-c"]
 # set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 
+
+# 
 gen-dir := 'generated'
+
+# The destination directories for the generated code.
 dest-rust := '~/Source/Repos/MediaPathServer/src/generated'
 dest-jsts := '~/Source/Repos/MediaPathClient/app/generated'
+
 
 all: gen-rust gen-jsts
 

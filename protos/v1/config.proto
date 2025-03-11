@@ -12,7 +12,7 @@ message Config {
     string config_file = 2;
 
     // 管理する写真フォルダー
-    string managed_photo_folder = 3;
+    string root_photo_folder = 3;
 
     // 対象とする画像ファイルの拡張子配列
     // ex ["jpg", "jpeg", "png"]
