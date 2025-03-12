@@ -20,12 +20,12 @@ message Photo {
 }
 
 // フォルダー内の全ての写真ファイルの情報を取得する
-message GetPhotosRequest {
+message ReadPhotosRequest {
     RequestMode mode = 1;
     string folder = 2;
 }
 
-message GetPhotosResponse {
+message ReadPhotosResponse {
     repeated Photo photos = 1;
 }
 

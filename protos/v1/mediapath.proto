@@ -9,7 +9,7 @@ import "v1/log.proto";
  
 service MediapathService {
     //
-    rpc ReadFolder (ReadFolderRequest) returns (ReadFolderResponse);
+    rpc ReadEntry (ReadEntryRequest) returns (ReadEntryResponse);
 
     // コンフィギュレーションを読み込みます。
     rpc ReadConfig (ReadConfigRequest) returns (ReadConfigResponse);
@@ -35,8 +35,8 @@ service MediapathService {
     // ログを読み込みます。
     rpc LoadLog (LoadLogRequest) returns (LoadLogResponse);
 
-    // 写真情報を取得します。
-    rpc GetPhotos (GetPhotosRequest) returns (GetPhotosResponse);
+    // 写真情報を読み込みます。
+    rpc ReadPhotos (ReadPhotosRequest) returns (ReadPhotosResponse);
 
     // 写真を移動します。
     rpc MovePhotos (MovePhotosRequest) returns (MovePhotosResponse);
@@ -97,12 +97,12 @@ message LoadLogResponse {
 }
 
 // フォルダー読み込みリクエストメッセージです。
-message ReadFolderRequest {
+message ReadEntryRequest {
     string folder = 2;
 }
 
 // フォルダー読み込みレスポンスメッセージです。
-message ReadFolderResponse {
+message ReadEntryResponse {
     repeated string folders = 1;
     repeated string files = 2;
 }
